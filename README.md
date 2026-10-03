@@ -32,7 +32,7 @@ To run this app locally, you should have the following programs installed on you
 #### Clone this repository
 
 ```
-git clone git@github.com/hngprojects/Zedu_fe.git
+git clone https://github.com/Zedu-sparrow/zedu-fe.git
 cd Zedu_fe
 ```
 
