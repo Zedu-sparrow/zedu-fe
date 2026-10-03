@@ -8,6 +8,21 @@ const metrics = [
   { text: "Educator satisfaction", amount: "98%" },
 ];
 
+const features = [
+  {
+    title: "Organized Channels",
+    description: "Every topic gets its own space, so nothing gets lost.",
+  },
+  {
+    title: "Cohort Communication",
+    description: "Bring everyone together and keep the conversation flowing.",
+  },
+  {
+    title: "Pricing That's Easy on the Wallet",
+    description: "Powerful features without the premium price tag.",
+  },
+];
+
 const HeroSection = () => {
   return (
     <section className="relative isolate flex w-full flex-col items-center gap-4 overflow-hidden px-4 py-10 text-center sm:gap-6 sm:px-8 sm:py-16  lg:gap-8 lg:px-12">
@@ -19,10 +34,16 @@ const HeroSection = () => {
         Built for Bootcamps and{" "}
         <span className="text-primary-500">Learning</span> Communities
       </h1>
-      <p className="max-w-[95%] text-xs text-neutral-600 sm:max-w-[90%] sm:text-base md:max-w-[65%] lg:max-w-[45%] lg:text-lg">
-        Talk about structured channels, cohort communication, and affordable
-        pricing.
-      </p>
+      <ul className="grid w-full max-w-5xl grid-cols-1 gap-3 text-xs text-neutral-600 sm:text-base md:grid-cols-3 md:gap-6 lg:text-lg">
+        {features.map((feature) => (
+          <li key={feature.title}>
+            <span className="font-semibold text-neutral-900">
+              {feature.title}:
+            </span>{" "}
+            {feature.description}
+          </li>
+        ))}
+      </ul>
       <div className="flex w-full max-w-md flex-row items-center justify-center gap-2 sm:gap-3">
         <ArrowBtn text="Try for free" linkToHome className="justify-center" />
         <OutlineBtn text="Contact sales" href="/contact-sales" />
