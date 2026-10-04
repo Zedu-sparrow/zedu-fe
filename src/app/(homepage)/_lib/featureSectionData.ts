@@ -42,7 +42,7 @@ export const otherFeatures = [
     icon: "/images/homepage/icons/whiteboard.png",
   },
   {
-    title: "AI class notes",
+    title: "AI-Powered Lecture Notes",
     description:
       "Simplifying complex concepts, empowering students to learn, explore, and master artificial intelligence with practical understanding.",
     icon: "/images/homepage/icons/AI-class-note.png",
