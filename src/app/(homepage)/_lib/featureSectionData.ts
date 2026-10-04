@@ -24,7 +24,7 @@ export const otherFeatures = [
     icon: "/images/homepage/icons/class-recordings.png",
   },
   {
-    title: "Conversation Mesh",
+    title: "Conversation Network",
     description:
       "An interconnected learning space where dialogue builds shared knowledge and continuous growth.",
     icon: "/images/homepage/icons/conversation-mesh.png",
