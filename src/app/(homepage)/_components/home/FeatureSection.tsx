@@ -47,7 +47,7 @@ export const FeatureSection = () => {
                 Fewer Tools, Smarter Learning
               </h1>
               <p className="text-sm leading-relaxed text-neutral-600 sm:text-base max-w-xl">
-                Replace scattered apps with one structured platform for
+                Replace fragmented apps with one structured platform for
                 communication, collaboration, and AI-powered education.
               </p>
               <div>
