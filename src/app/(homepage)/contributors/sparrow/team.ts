@@ -239,8 +239,9 @@ export const TEAM: Team = {
     {
       fullName: "Uthman Idowu",
       zeduUsername: "Uthman | QA Engineer",
-      githubEmail: "uthmaidowu531@gmail.com",
-      githubUsername: "Denobletech",
+      githubEmail: "uthmanidowu531@gmail.com",
+      githubUsername: "denobletch",
+      primaryField: "QA Testing",
       role: "Member",
     },
     {
