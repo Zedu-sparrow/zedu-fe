@@ -179,6 +179,7 @@ export const TEAM: Team = {
       githubEmail: "satarmustapha93@gmail.com",
       githubUsername: "satarmustapha93-del",
       role: "Member",
+      primaryField: "Frontend",
     },
     {
       fullName: "Bewaji Akintomiwa",
