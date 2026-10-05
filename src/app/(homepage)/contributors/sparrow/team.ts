@@ -136,6 +136,7 @@ export const TEAM: Team = {
       zeduUsername: "Oby Ezeokoli",
       githubEmail: "oby.eze@gmail.com",
       githubUsername: "AfrikTechie",
+      primaryField: "Data Analysis",
       role: "Member",
     },
     {
