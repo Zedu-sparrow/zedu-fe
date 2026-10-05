@@ -234,6 +234,7 @@ export const TEAM: Team = {
       zeduUsername: "PearlAkpaka",
       githubEmail: "koosi.akpaka@gmail.com",
       githubUsername: "Pearl-bit-tech",
+      primaryField: "Product Management",
       role: "Member",
     },
     {
