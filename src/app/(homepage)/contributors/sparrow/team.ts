@@ -73,6 +73,7 @@ export const TEAM: Team = {
       zeduUsername: "Francis-7-tech",
       githubEmail: "obidigwefrancis94@gmail.com",
       githubUsername: "francis-7-tech",
+      primaryField: "Fullstack Development",
       role: "Member",
     },
     {
