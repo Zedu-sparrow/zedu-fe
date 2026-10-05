@@ -31,6 +31,7 @@ export const TEAM: Team = {
       zeduUsername: "denise_davida",
       githubEmail: "hello.deniseondata@gmail.com",
       githubUsername: "databydenise",
+      primaryField: "Data Science",
       role: "Member",
     },
     {
