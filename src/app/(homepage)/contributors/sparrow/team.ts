@@ -146,10 +146,10 @@ export const TEAM: Team = {
       role: "Member",
     },
     {
-      fullName: "Peter John", 
+      fullName: "Peter John",
       zeduUsername: "John_P",
       githubEmail: "peterjohnimaji72@gmail.com",
-      githubUsername: "JohnP72", 
+      githubUsername: "JohnP72",
       role: "Member",
     },
     {
@@ -182,7 +182,7 @@ export const TEAM: Team = {
     },
     {
       fullName: "Bewaji Akintomiwa",
-      zeduUsername: "Royto", 
+      zeduUsername: "Royto",
       githubEmail: "akintomiwabewaji@gmail.com",
       githubUsername: "Akinbewaji",
       role: "Member",
@@ -227,6 +227,7 @@ export const TEAM: Team = {
       zeduUsername: "Uzor",
       githubEmail: "huzhor94@gmail.com",
       githubUsername: "Uzodinma9",
+      primaryField: "Product Management",
       role: "Member",
     },
     {
@@ -244,7 +245,7 @@ export const TEAM: Team = {
       role: "Member",
     },
     {
-      fullName: "Badejo Toluwalase", 
+      fullName: "Badejo Toluwalase",
       zeduUsername: "Tolu Knightwatch",
       githubEmail: "badejoolorunfunmi@gmail.com",
       githubUsername: "Toluwalase1",
