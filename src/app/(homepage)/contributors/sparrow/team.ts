@@ -271,5 +271,12 @@ export const TEAM: Team = {
       githubUsername: "elsie456",
       role: "Member",
     },
+    {
+      fullName: "Miracle Ette",
+      zeduUsername: "miracle ette",
+      githubEmail: "miracleette2910@gmail.com",
+      githubUsername: "miracleette-lab",
+      role: "Member",
+    },
   ],
 };
