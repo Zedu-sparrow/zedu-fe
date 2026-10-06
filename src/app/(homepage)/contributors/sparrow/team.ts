@@ -24,6 +24,7 @@ export const TEAM: Team = {
       zeduUsername: "dev_b",
       githubEmail: "crypticcodetechnologies@gmail.com",
       githubUsername: "abrahambishopcodes",
+      primaryField: "Full-stack Engineer",
       role: "Team Lead",
     },
     {
