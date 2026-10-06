@@ -97,8 +97,8 @@ export const FeatureSection = () => {
                 <Image
                   src={"/images/homepage/socials-row.png"}
                   alt="socials-row"
-                  height={35}
-                  width={225}
+                  height={70}
+                  width={480}
                   priority
                   className="h-auto w-[190px] sm:w-[225px]"
                 />
@@ -112,8 +112,8 @@ export const FeatureSection = () => {
               <Image
                 src={"/images/homepage/zedu-illustration.png"}
                 alt="Illustration of Zedu connected to other social apps"
-                height={306}
-                width={306}
+                height={614}
+                width={618}
                 priority
                 className="h-auto w-full"
               />

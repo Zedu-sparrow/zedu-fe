@@ -8,9 +8,11 @@ import Header from "./_components/header";
 import { ForceLightTheme } from "~/components/theme/force-light-theme";
 
 export const metadata: Metadata = {
-  metadataBase: process.env.NEXT_PUBLIC_CLIENT_URL
+  metadataBase: siteUrl()
     ? new URL(siteUrl())
-    : undefined,
+    : process.env.NODE_ENV === "development"
+      ? new URL("http://localhost:3000")
+      : undefined,
   title: {
     default: "Zedu - Learning Platform for Bootcamps, Schools, and Cohorts",
     template: "%s | Zedu",

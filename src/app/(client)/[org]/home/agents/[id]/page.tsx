@@ -35,7 +35,7 @@ interface Message {
 
 interface Platform {
   name: string;
-  icon: StaticImageData;
+  icon: string | StaticImageData;
 }
 
 const AgentPage = () => {
