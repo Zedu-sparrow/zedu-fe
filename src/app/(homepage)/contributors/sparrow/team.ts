@@ -39,6 +39,13 @@ export const TEAM: Team = {
       //   add your primary role here God'sglory if you have one, e.g. "Frontend Developer"
       role: "Member",
     },
+    {
+      fullName: "Oby",
+      zeduUsername: "oby",
+      githubUsername: "Afriktechie",
+      primary: "Data Analysis",
+      role: "Member",
+    },
   ],
 };
 
