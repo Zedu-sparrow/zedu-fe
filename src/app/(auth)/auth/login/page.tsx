@@ -452,6 +452,13 @@ function Login() {
                   )}
                 </Button>
 
+                <div>
+                  Don't have an account?{" "}
+                  <Link href={"/auth/sign-up"} className="text-[#7141F8]">
+                    Sign up
+                  </Link>
+                </div>
+
                 <Link href="/auth/magiclink">
                   <Button
                     type="submit"
