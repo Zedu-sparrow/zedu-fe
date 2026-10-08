@@ -100,5 +100,13 @@ export const TEAM: Team = {
       role: "Member",
       field: "Frontend Development",
     },
+    {
+      fullName: "Ejikeme Chinaza",
+      zeduUsername: "Ejikeme Chinaza",
+      githubUsername: "estherejikeme18-sketch",
+      role: "Member",
+      field: "Product Designer",
+    },
+    
   ],
 };
