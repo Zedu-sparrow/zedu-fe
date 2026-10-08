@@ -44,5 +44,12 @@ export const TEAM: Team = {
       role: "Member",
       field: "UI/UX Design",
     },
+    {
+      fullName: "Victor Onyenekwe",
+      zeduUsername: "Juice",
+      githubUsername: "Juice",
+      role: "Member",
+      field: "UI/UX Design",
+    },
   ],
 };
