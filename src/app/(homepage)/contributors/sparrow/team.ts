@@ -37,5 +37,12 @@ export const TEAM: Team = {
       role: "Member",
       field: "[Add your field of expertise]",
     },
+    {
+      fullName: "Kalu Emmanuel",
+      zeduUsername: "Kalu Emmanuel",
+      githubUsername: "emmanuelkalu769-ctrl",
+      role: "Member",
+      field: "Data Analyst",
+    },
   ],
 };
