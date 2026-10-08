@@ -38,6 +38,13 @@ export const TEAM: Team = {
       field: "[Add your field of expertise]",
     },
     {
+      fullName: "Kanyinsola Ogunwale",
+      zeduUsername: "kanyinsolaogunwale",
+      githubUsername: "kanyinsolaogunwale",
+      role: "Member",
+      field: "UI/UX Design",
+    },
+    {
       fullName: "Abdulmuiz Abdulsalam Olalekan",
       zeduUsername: "abdulmuiz abdulsalam olalekan",
       githubUsername: "Iampeace001",
@@ -50,6 +57,13 @@ export const TEAM: Team = {
       githubUsername: "emmanuelkalu769-ctrl",
       role: "Member",
       field: "Data Analyst",
+    },
+    {
+      fullName: "Victor Adeshile",
+      zeduUsername: "Victor Adeshile",
+      githubUsername: "davik4life",
+      role: "Member",
+      field: "Full-Stack Software Engineer",
     },
     {
       fullName: "Lawal Muhammed Olamide",
