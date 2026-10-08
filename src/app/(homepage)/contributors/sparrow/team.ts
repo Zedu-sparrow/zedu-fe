@@ -44,5 +44,12 @@ export const TEAM: Team = {
       role: "Member",
       field: "UI/UX Design",
     },
+    {
+      fullName: "Boluwatife Adesola",
+      zeduUsername: "Adesola",
+      githubUsername: "adesolabolu",
+      role: "Member",
+      field: "Data Analysis",
+    },
   ],
 };
