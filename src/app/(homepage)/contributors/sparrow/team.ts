@@ -37,5 +37,12 @@ export const TEAM: Team = {
       role: "Member",
       field: "[Add your field of expertise]",
     },
+    {
+      fullName: "Kanyinsola Ogunwale",
+      zeduUsername: "kanyinsolaogunwale",
+      githubUsername: "kanyinsolaogunwale",
+      role: "Member",
+      field: "UI/UX Design",
+    },
   ],
 };
