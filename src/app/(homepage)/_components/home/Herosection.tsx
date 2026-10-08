@@ -42,7 +42,7 @@ const HeroSection = () => {
           |
         </span>
         <p className="leading-relaxed sm:leading-normal">
-          Trusted by most modern educators and learners worldwide
+          Trusted by many modern educators and learners worldwide
         </p>
       </div>
       <div className="grid w-full max-w-4xl grid-cols-3 place-items-center gap-1.5 sm:gap-6 md:gap-10">
