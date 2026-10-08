@@ -73,4 +73,4 @@ export const TEAM: Team = {
       field: "Product Design",
     },
   ],
-};\
+};
