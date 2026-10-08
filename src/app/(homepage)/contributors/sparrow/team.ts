@@ -38,6 +38,13 @@ export const TEAM: Team = {
       field: "[Add your field of expertise]",
     },
     {
+      fullName: "Abdulmuiz Abdulsalam Olalekan",
+      zeduUsername: "abdulmuiz abdulsalam olalekan",
+      githubUsername: "Iampeace001",
+      role: "Member",
+      field: "UI/UX Design",
+    },
+    {
       fullName: "Kalu Emmanuel",
       zeduUsername: "Kalu Emmanuel",
       githubUsername: "emmanuelkalu769-ctrl",
