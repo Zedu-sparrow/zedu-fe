@@ -86,5 +86,12 @@ export const TEAM: Team = {
       role: "Member",
       field: "Data Analysis",
     },
+    {
+      fullName: "Yusuf Babatunde Sodiq",
+      zeduUsername: "asodiq001",
+      githubUsername: "asodiq001",
+      role: "Member",
+      field: "Frontend Development",
+    },
   ],
 };
