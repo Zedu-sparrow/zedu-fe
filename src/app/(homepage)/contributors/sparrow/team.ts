@@ -86,5 +86,12 @@ export const TEAM: Team = {
       role: "Member",
       field: "Data Analysis",
     },
+    {
+      fullName: "Abdulrahman Jamaldeen Ayomide",
+      zeduUsername: "Jamal Ayomide",
+      githubUsername: "jammally470-sys",
+      role: "Member",
+      field: "Fullstack Development",
+    },
   ],
 };
