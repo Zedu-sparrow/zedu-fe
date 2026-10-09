@@ -3,9 +3,9 @@
   "version": "0.14.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "node api.js && next dev",
+    "build": "node api.js && next build",
+    "start": "node api.js && next start",
     "prepare": "husky",
     "postinstall": "node -e \"if (process.platform !== 'win32') require('child_process').execSync('chmod +x .husky/*', { stdio: 'inherit' })\"",
     "lint": "eslint ./src",
@@ -216,7 +216,8 @@
     "overrides": {
       "react-email>next": "$next",
       "lodash@<4.17.12": "4.17.21",
-      "underscore@<1.12.1": "1.13.8"
+      "underscore@<1.12.1": "1.13.8",
+      "handlebars@<4.7.10": "4.7.10"
     }
   },
   "overrides": {
@@ -224,6 +225,7 @@
     "@types/react-dom": "19.2.3",
     "react-email>next": "$next",
     "lodash@<4.17.12": "4.17.21",
-    "underscore@<1.12.1": "1.13.8"
+    "underscore@<1.12.1": "1.13.8",
+    "handlebars@<4.7.10": "4.7.10"
   }
 }
