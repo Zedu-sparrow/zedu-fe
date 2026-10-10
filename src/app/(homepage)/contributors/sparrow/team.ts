@@ -93,5 +93,12 @@ export const TEAM: Team = {
       role: "Member",
       field: "AI Product Developer",
     },
+    {
+      fullName: "Uthman Adewale Idowu",
+      zeduUsername: "Uthman | QA Engineer",
+      githubUsername: "denobletch",
+      role: "Member",
+      field: "QA Testing",
+    },
   ],
 };
