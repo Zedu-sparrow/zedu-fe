@@ -93,5 +93,12 @@ export const TEAM: Team = {
       role: "Member",
       field: "Product Management",
     },
+    {
+      fullName: "Paul Folorunsho",
+      zeduUsername: "Paul Folorunsho",
+      githubUsername: "folip01",
+      role: "Member",
+      field: "Backend Development",
+    },
   ],
 };
