@@ -269,6 +269,7 @@ export const TEAM: Team = {
       zeduUsername: "Elsie Anucha",
       githubEmail: "elsieanucha@gmail.com",
       githubUsername: "elsie456",
+      primaryField: "UI/UX",
       role: "Member",
     },
   ],
