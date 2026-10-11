@@ -96,9 +96,16 @@ export const TEAM: Team = {
     {
       fullName: "Joshua Emmanuel",
       zeduUsername: "joshua_emmanuel",
-      githubUsername: "JoshuaEmmanuel",
+      githubUsername: "joshua-emmanuel",
       role: "Member",
       field: "Frontend Developer",
+    },
+    {
+      fullName: "Hafeezah Kadiri",
+      zeduUsername: "Hafeey",
+      githubUsername: "HAFEEZAH029",
+      role: "Member",
+      field: "Frontend Development",
     },
   ],
 };
