@@ -100,5 +100,12 @@ export const TEAM: Team = {
       role: "Member",
       field: "Frontend Development",
     },
+    {
+      fullName: "Michael Ndianaobong Churchill",
+      zeduUsername: "D-Gen",
+      githubUsername: "Mickyhill",
+      role: "Member",
+      field: "Frontend & Mobile Development",
+    },
   ],
 };
