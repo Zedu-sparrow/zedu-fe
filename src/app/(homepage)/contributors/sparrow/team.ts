@@ -100,5 +100,12 @@ export const TEAM: Team = {
       role: "Member",
       field: "Frontend Development",
     },
+    {
+      fullName: "Ejike Odoh",
+      zeduUsername: "ejike",
+      githubUsername: "EjikeOdoh",
+      role: "Member",
+      field: "Frontend Developer",
+    },
   ],
 };
