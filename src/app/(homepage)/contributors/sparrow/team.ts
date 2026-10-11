@@ -100,5 +100,33 @@ export const TEAM: Team = {
       role: "Member",
       field: "Data Analysis",
     },
+    {
+      fullName: "Hafeezah Kadiri",
+      zeduUsername: "Hafeey",
+      githubUsername: "HAFEEZAH029",
+      role: "Member",
+      field: "Frontend Developer",
+    },
+    {
+      fullName: "Joshua Emmanuel",
+      zeduUsername: "joshua_emmanuel",
+      githubUsername: "joshua-emmanuel",
+      role: "Member",
+      field: "Frontend Developer",
+    },
+    {
+      fullName: "Uyanwanne Emmanuel Chukwudaru",
+      zeduUsername: "emmyanzo",
+      githubUsername: "emmyanzx",
+      role: "Member",
+      field: "Data Analysis",
+    },
+    {
+      fullName: "Eda Cynthia Itsekirimi",
+      zeduUsername: "Cynthy",
+      githubUsername: "Edacynthia",
+      role: "Member",
+      field: "Backend Developer",
+    },
   ],
 };
