@@ -129,11 +129,11 @@ export const TEAM: Team = {
       field: "Backend Developer",
     },
     {
-      fullName: "Paul Folorunsho",
-      zeduUsername: "Paul Folorunsho",
-      githubUsername: "folip01",
+      fullName: "Ejike Odoh",
+      zeduUsername: "ejike",
+      githubUsername: "EjikeOdoh",
       role: "Member",
-      field: "Backend Development",
+      field: "Frontend Developer",
     },
   ],
 };
