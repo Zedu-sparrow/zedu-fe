@@ -136,7 +136,7 @@ export const TEAM: Team = {
       field: "Frontend Developer",
     },
     {
-      fullName: "Ochu Dunamis Felix",
+      fullName: "Ochu Dunamis",
       zeduUsername: "dunamis_best",
       githubUsername: "dunamisbest5-lgtm",
       role: "Member",
