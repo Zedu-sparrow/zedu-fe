@@ -107,7 +107,7 @@ export const TEAM: Team = {
       role: "Member",
       field: "Frontend Developer",
     },
-     {
+    {
       fullName: "Paul Ajibola",
       zeduUsername: "paul ajibola",
       githubUsername: "Paul-Ajibola",
