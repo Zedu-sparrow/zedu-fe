@@ -63,57 +63,48 @@ function Policy() {
     height: number;
   } | null>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
   const mobileMenuSlotRef = useRef<HTMLDivElement>(null);
   const mobileMenuSentinelRef = useRef<HTMLDivElement>(null);
   const currentSection = POLICY_SECTIONS[mobileSectionIndex];
 
   // Pin the bar under the site header once the 1px sentinel above it
-  // scrolls behind the header
+  // scrolls behind the header. Re-checked on resize too, because a
+  // breakpoint change or rotation alters geometry without an
+  // IntersectionObserver notification; never pinned on desktop, where the
+  // sentinel and slot are hidden and measure as zero
   useEffect(() => {
     const sentinel = mobileMenuSentinelRef.current;
     const slot = mobileMenuSlotRef.current;
     if (!sentinel || !slot) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const scrolledPast =
-          !entry.isIntersecting &&
-          entry.boundingClientRect.top < SITE_HEADER_HEIGHT;
-        if (!scrolledPast) {
-          setPinnedBox(null);
-          return;
-        }
-        const { left, width } = slot.getBoundingClientRect();
-        setPinnedBox({
-          left,
-          width,
-          height: mobileMenuRef.current?.offsetHeight ?? 0,
-        });
-      },
-      { rootMargin: `-${SITE_HEADER_HEIGHT}px 0px 0px 0px` }
-    );
-    observer.observe(sentinel);
-    return () => observer.disconnect();
-  }, []);
-
-  // Keep the pinned bar's position and width current after a resize or
-  // rotation (the slot keeps its in-flow size while the bar is fixed)
-  const isMobileMenuPinned = pinnedBox !== null;
-  useEffect(() => {
-    if (!isMobileMenuPinned) return;
-    const remeasure = () => {
-      const slot = mobileMenuSlotRef.current;
-      if (!slot) return;
+    const updatePin = () => {
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      const scrolledPast =
+        sentinel.getBoundingClientRect().top < SITE_HEADER_HEIGHT;
+      if (!isMobile || !scrolledPast) {
+        setPinnedBox(null);
+        return;
+      }
       const { left, width } = slot.getBoundingClientRect();
+      const height = mobileMenuRef.current?.offsetHeight ?? 0;
       setPinnedBox((box) =>
-        box && (box.left !== left || box.width !== width)
-          ? { ...box, left, width }
-          : box
+        box && box.left === left && box.width === width && box.height === height
+          ? box
+          : { left, width, height }
       );
     };
-    window.addEventListener("resize", remeasure);
-    return () => window.removeEventListener("resize", remeasure);
-  }, [isMobileMenuPinned]);
+
+    const observer = new IntersectionObserver(updatePin, {
+      rootMargin: `-${SITE_HEADER_HEIGHT}px 0px 0px 0px`,
+    });
+    observer.observe(sentinel);
+    window.addEventListener("resize", updatePin);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updatePin);
+    };
+  }, []);
 
   // On phones, a link straight to a section (e.g. /policy#contact-us), or a
   // later hash change, lets the browser put the heading under the fixed
@@ -186,7 +177,11 @@ function Policy() {
       }
     };
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setIsMobileMenuOpen(false);
+      if (event.key === "Escape") {
+        // The focused link is about to unmount; return focus to the button
+        mobileMenuButtonRef.current?.focus();
+        setIsMobileMenuOpen(false);
+      }
     };
 
     document.addEventListener("pointerdown", handlePointerDown);
@@ -202,6 +197,10 @@ function Policy() {
     id: string
   ) => {
     event.preventDefault();
+    // Move focus to the chosen section, since the focused link unmounts
+    const target = document.getElementById(id);
+    target?.setAttribute("tabindex", "-1");
+    target?.focus({ preventScroll: true });
     setIsMobileMenuOpen(false);
     scrollToPolicySection(
       id,
@@ -288,6 +287,7 @@ function Policy() {
               }
             >
               <button
+                ref={mobileMenuButtonRef}
                 type="button"
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="policy-mobile-contents"
@@ -317,7 +317,16 @@ function Policy() {
                 <nav
                   id="policy-mobile-contents"
                   aria-label="Privacy Policy contents"
-                  className="absolute inset-x-5 top-full rounded-xl border border-neutral-200 bg-white p-1.5 shadow-lg"
+                  className="absolute inset-x-5 top-full overflow-y-auto rounded-xl border border-neutral-200 bg-white p-1.5 shadow-lg"
+                  // While pinned, the page can't scroll the list into view,
+                  // so keep it within the space below the header and bar
+                  style={
+                    pinnedBox
+                      ? {
+                          maxHeight: `calc(100dvh - ${SITE_HEADER_HEIGHT + pinnedBox.height + 8}px)`,
+                        }
+                      : undefined
+                  }
                 >
                   <ol>
                     {POLICY_SECTIONS.map(({ id, title }, index) => (
