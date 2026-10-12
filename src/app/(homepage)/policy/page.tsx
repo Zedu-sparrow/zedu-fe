@@ -1,8 +1,42 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 import SectionWrapper from "./component/SectionWrapper";
 import { siteUrl } from "~/lib/env-urls";
+import { cn } from "~/lib/utils";
+
+const POLICY_SECTIONS = [
+  { id: "info-collected", title: "Information We Collect" },
+  { id: "how", title: "How We Use Your Information" },
+  { id: "disclosure", title: "Disclosure of Your Information" },
+  { id: "security", title: "Security of Your Information" },
+  { id: "rights", title: "Your Rights" },
+  { id: "policy", title: "Changes to This Privacy Policy" },
+  { id: "cookie", title: "Cookies and Tracking Technologies" },
+  { id: "data-retention", title: "Data Retention" },
+  { id: "contact-us", title: "Contact Us" },
+];
+
+// Height of the fixed site header (h-20 in _components/header)
+const SITE_HEADER_HEIGHT = 80;
+
+// Scroll so a section heading sits just below the header and the mobile bar
+const scrollToPolicySection = (
+  id: string,
+  barHeight: number,
+  behavior: ScrollBehavior
+) => {
+  const target = document.getElementById(id);
+  if (!target) return;
+  const top =
+    target.getBoundingClientRect().top +
+    window.scrollY -
+    SITE_HEADER_HEIGHT -
+    barHeight -
+    16;
+  window.scrollTo({ top, behavior });
+};
 
 // Set document title for client component
 const useDocumentTitle = (title: string) => {
@@ -17,6 +51,165 @@ function Policy() {
   useDocumentTitle("Privacy Policy - Zedu");
 
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
+
+  // Mobile contents menu (the desktop sidebar is hidden below md)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileSectionIndex, setMobileSectionIndex] = useState(0);
+  // The homepage layout sets overflow-x-hidden, which disables
+  // position: sticky, so the bar is pinned with position: fixed instead
+  const [pinnedBox, setPinnedBox] = useState<{
+    left: number;
+    width: number;
+    height: number;
+  } | null>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const mobileMenuSlotRef = useRef<HTMLDivElement>(null);
+  const mobileMenuSentinelRef = useRef<HTMLDivElement>(null);
+  const currentSection = POLICY_SECTIONS[mobileSectionIndex];
+
+  // Pin the bar under the site header once the 1px sentinel above it
+  // scrolls behind the header
+  useEffect(() => {
+    const sentinel = mobileMenuSentinelRef.current;
+    const slot = mobileMenuSlotRef.current;
+    if (!sentinel || !slot) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const scrolledPast =
+          !entry.isIntersecting &&
+          entry.boundingClientRect.top < SITE_HEADER_HEIGHT;
+        if (!scrolledPast) {
+          setPinnedBox(null);
+          return;
+        }
+        const { left, width } = slot.getBoundingClientRect();
+        setPinnedBox({
+          left,
+          width,
+          height: mobileMenuRef.current?.offsetHeight ?? 0,
+        });
+      },
+      { rootMargin: `-${SITE_HEADER_HEIGHT}px 0px 0px 0px` }
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, []);
+
+  // Keep the pinned bar's position and width current after a resize or
+  // rotation (the slot keeps its in-flow size while the bar is fixed)
+  const isMobileMenuPinned = pinnedBox !== null;
+  useEffect(() => {
+    if (!isMobileMenuPinned) return;
+    const remeasure = () => {
+      const slot = mobileMenuSlotRef.current;
+      if (!slot) return;
+      const { left, width } = slot.getBoundingClientRect();
+      setPinnedBox((box) =>
+        box && (box.left !== left || box.width !== width)
+          ? { ...box, left, width }
+          : box
+      );
+    };
+    window.addEventListener("resize", remeasure);
+    return () => window.removeEventListener("resize", remeasure);
+  }, [isMobileMenuPinned]);
+
+  // On phones, a link straight to a section (e.g. /policy#contact-us), or a
+  // later hash change, lets the browser put the heading under the fixed
+  // header and bar, so redo that scroll with the same offset as the menu
+  useEffect(() => {
+    let frame = 0;
+    const scrollToHash = () => {
+      cancelAnimationFrame(frame);
+      const id = window.location.hash.slice(1);
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      if (!isMobile || !POLICY_SECTIONS.some((section) => section.id === id)) {
+        return;
+      }
+      frame = requestAnimationFrame(() =>
+        scrollToPolicySection(
+          id,
+          mobileMenuRef.current?.offsetHeight ?? 0,
+          "auto"
+        )
+      );
+    };
+
+    scrollToHash();
+    window.addEventListener("hashchange", scrollToHash);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("hashchange", scrollToHash);
+    };
+  }, []);
+
+  // The current section is the last heading that has reached the top
+  // quarter of the screen below the bar
+  useEffect(() => {
+    let frame = 0;
+    const updateMobileSection = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const barBottom = Math.max(
+          mobileMenuRef.current?.getBoundingClientRect().bottom ?? 0,
+          SITE_HEADER_HEIGHT
+        );
+        const readingLine = barBottom + (window.innerHeight - barBottom) * 0.25;
+        let index = 0;
+        POLICY_SECTIONS.forEach(({ id }, i) => {
+          const heading = document.getElementById(id);
+          if (heading && heading.getBoundingClientRect().top <= readingLine) {
+            index = i;
+          }
+        });
+        setMobileSectionIndex(index);
+      });
+    };
+
+    updateMobileSection();
+    window.addEventListener("scroll", updateMobileSection, { passive: true });
+    window.addEventListener("resize", updateMobileSection);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", updateMobileSection);
+      window.removeEventListener("resize", updateMobileSection);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!mobileMenuRef.current?.contains(event.target as Node)) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMobileMenuOpen(false);
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isMobileMenuOpen]);
+
+  const goToSection = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    id: string
+  ) => {
+    event.preventDefault();
+    setIsMobileMenuOpen(false);
+    scrollToPolicySection(
+      id,
+      mobileMenuRef.current?.offsetHeight ?? 0,
+      "smooth"
+    );
+    window.history.replaceState(null, "", `#${id}`);
+  };
 
   useEffect(() => {
     const sections = document.querySelectorAll("li[id]");
@@ -54,88 +247,17 @@ function Policy() {
             Contents
           </p>
           <ul className="list-decimal p-4 flex flex-col gap-5 text-zinc-800">
-            <Link href="#info-collected">
-              <li
-                className={`hover:text-blue-500 ${
-                  activeSection === "info-collected" ? "text-blue-500" : ""
-                }`}
-              >
-                Information We Collect
-              </li>
-            </Link>
-            <Link href="#how">
-              <li
-                className={`hover:text-blue-500 ${
-                  activeSection === "how" ? "text-blue-500" : ""
-                }`}
-              >
-                How We Use Your Information
-              </li>
-            </Link>
-            <Link href="#disclosure">
-              <li
-                className={`hover:text-blue-500 ${
-                  activeSection === "disclosure" ? "text-blue-500" : ""
-                }`}
-              >
-                Disclosure of Your Information
-              </li>
-            </Link>
-            <Link href="#security">
-              <li
-                className={`hover:text-blue-500 ${
-                  activeSection === "security" ? "text-blue-500" : ""
-                }`}
-              >
-                Security of Your Information
-              </li>
-            </Link>
-            <Link href="#rights">
-              <li
-                className={`hover:text-blue-500 ${
-                  activeSection === "rights" ? "text-blue-500" : ""
-                }`}
-              >
-                Your Rights
-              </li>
-            </Link>
-            <Link href="#policy">
-              <li
-                className={`hover:text-blue-500 ${
-                  activeSection === "policy" ? "text-blue-500" : ""
-                }`}
-              >
-                Changes to This Privacy Policy
-              </li>
-            </Link>
-
-            <Link href="#cookie">
-              <li
-                className={`hover:text-blue-500 ${
-                  activeSection === "cookie" ? "text-blue-500" : ""
-                }`}
-              >
-                Cookies and Tracking Technologies
-              </li>
-            </Link>
-            <Link href="#data-retention">
-              <li
-                className={`hover:text-blue-500 ${
-                  activeSection === "data-retention" ? "text-blue-500" : ""
-                }`}
-              >
-                Data Retention
-              </li>
-            </Link>
-            <Link href="#contact-us">
-              <li
-                className={`hover:text-blue-500 ${
-                  activeSection === "contact-us" ? "text-blue-500" : ""
-                }`}
-              >
-                Contact Us
-              </li>
-            </Link>
+            {POLICY_SECTIONS.map(({ id, title }) => (
+              <Link key={id} href={`#${id}`}>
+                <li
+                  className={`hover:text-blue-500 ${
+                    activeSection === id ? "text-blue-500" : ""
+                  }`}
+                >
+                  {title}
+                </li>
+              </Link>
+            ))}
           </ul>
         </div>
 
@@ -143,6 +265,92 @@ function Policy() {
           <p className="text-2xl md:text-4xl font-semibold leading-10 pb-5">
             Our Privacy Policy
           </p>
+          <div
+            ref={mobileMenuSentinelRef}
+            aria-hidden="true"
+            className="h-px md:hidden"
+          />
+          <div
+            ref={mobileMenuSlotRef}
+            className="-mx-5 mb-5 md:hidden"
+            style={pinnedBox ? { height: pinnedBox.height } : undefined}
+          >
+            <div
+              ref={mobileMenuRef}
+              className={cn(
+                "z-20 bg-white px-5 py-2",
+                pinnedBox ? "fixed top-20 shadow-sm" : "relative"
+              )}
+              style={
+                pinnedBox
+                  ? { left: pinnedBox.left, width: pinnedBox.width }
+                  : undefined
+              }
+            >
+              <button
+                type="button"
+                aria-expanded={isMobileMenuOpen}
+                aria-controls="policy-mobile-contents"
+                onClick={() => setIsMobileMenuOpen((open) => !open)}
+                className="flex w-full items-center justify-between gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 text-left shadow-sm"
+              >
+                <span className="flex min-w-0 flex-col">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                    Contents · {mobileSectionIndex + 1} of{" "}
+                    {POLICY_SECTIONS.length}
+                  </span>
+                  <span className="truncate text-base font-semibold text-primary-500">
+                    {currentSection.title}
+                  </span>
+                </span>
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-primary-500">
+                  <ChevronDown
+                    aria-hidden="true"
+                    className={cn(
+                      "size-5 transition-transform",
+                      isMobileMenuOpen && "rotate-180"
+                    )}
+                  />
+                </span>
+              </button>
+              {isMobileMenuOpen && (
+                <nav
+                  id="policy-mobile-contents"
+                  aria-label="Privacy Policy contents"
+                  className="absolute inset-x-5 top-full rounded-xl border border-neutral-200 bg-white p-1.5 shadow-lg"
+                >
+                  <ol>
+                    {POLICY_SECTIONS.map(({ id, title }, index) => (
+                      <li key={id}>
+                        <a
+                          href={`#${id}`}
+                          onClick={(event) => goToSection(event, id)}
+                          aria-current={
+                            id === currentSection.id ? "location" : undefined
+                          }
+                          className={cn(
+                            "flex gap-3 rounded-lg px-3 py-2.5 text-[15px] text-neutral-800",
+                            id === currentSection.id &&
+                              "bg-primary-50 font-semibold text-primary-500"
+                          )}
+                        >
+                          <span
+                            className={cn(
+                              "w-4 shrink-0 text-neutral-400",
+                              id === currentSection.id && "text-primary-500"
+                            )}
+                          >
+                            {index + 1}
+                          </span>
+                          {title}
+                        </a>
+                      </li>
+                    ))}
+                  </ol>
+                </nav>
+              )}
+            </div>
+          </div>
           <p className="text-base font-normal leading-6 text-neutral-800">
             Thank you for using Zedu. This Privacy Policy explains how we
             collect, use, disclose, and safeguard your information when you
