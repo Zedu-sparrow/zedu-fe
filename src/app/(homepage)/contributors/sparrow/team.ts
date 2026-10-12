@@ -100,6 +100,7 @@ export const TEAM: Team = {
       role: "Member",
       field: "Frontend Developer",
     },
+    {
       fullName: "Hafeezah Kadiri",
       zeduUsername: "Hafeey",
       githubUsername: "HAFEEZAH029",
