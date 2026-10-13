@@ -129,6 +129,13 @@ export const TEAM: Team = {
       field: "Backend Developer",
     },
     {
+      fullName: "Elsie Anucha",
+      zeduUsername: "Elsie Anucha",
+      githubUsername: "elsie456",
+      role: "Member",
+      field: "UI/UX Design",
+    },
+    {
       fullName: "Ejike Odoh",
       zeduUsername: "ejike",
       githubUsername: "EjikeOdoh",
