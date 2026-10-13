@@ -133,7 +133,7 @@ export const TEAM: Team = {
       zeduUsername: "ejike",
       githubUsername: "EjikeOdoh",
       role: "Member",
-      field: "Frontend Developer",
+      field: "Frontend Engineer",
     },
     {
       fullName: "Paul Folorunsho",
