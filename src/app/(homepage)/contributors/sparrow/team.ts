@@ -129,11 +129,18 @@ export const TEAM: Team = {
       field: "Backend Developer",
     },
     {
+      fullName: "Elsie Anucha",
+      zeduUsername: "Elsie Anucha",
+      githubUsername: "elsie456",
+      role: "Member",
+      field: "UI/UX Design",
+    },
+    {
       fullName: "Ejike Odoh",
       zeduUsername: "ejike",
       githubUsername: "EjikeOdoh",
       role: "Member",
-      field: "Frontend Developer",
+      field: "Frontend Engineer",
     },
     {
       fullName: "Paul Folorunsho",
@@ -148,6 +155,11 @@ export const TEAM: Team = {
       githubUsername: "Solo9-pora",
       role: "Member",
       field: "Product Management",
+      fullName: "Raji Habeeb Ayinde",
+      zeduUsername: "habeebraji",
+      githubUsername: "hbiit",
+      role: "Member",
+      field: "Backend Development",
     },
   ],
 };
