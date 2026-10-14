@@ -142,5 +142,12 @@ export const TEAM: Team = {
       role: "Member",
       field: "Backend Development",
     },
+    {
+      fullName: "Maryam Gana Mohammed",
+      zeduUsername: "maryam mohammed gana",
+      githubUsername: "MaryamGana002-cmyk",
+      role: "Member",
+      field: "Product Design",
+    },
   ],
 };
