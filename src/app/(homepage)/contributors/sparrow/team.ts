@@ -155,6 +155,8 @@ export const TEAM: Team = {
       githubUsername: "Solo9-pora",
       role: "Member",
       field: "Product Management",
+    },
+    {
       fullName: "Raji Habeeb Ayinde",
       zeduUsername: "habeebraji",
       githubUsername: "hbiit",
