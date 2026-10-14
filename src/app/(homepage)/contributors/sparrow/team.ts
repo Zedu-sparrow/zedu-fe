@@ -163,5 +163,12 @@ export const TEAM: Team = {
       role: "Member",
       field: "Backend Development",
     },
+    {
+      fullName: "Ochu Dunamis Felix",
+      zeduUsername: "dunamis_best",
+      githubUsername: "dunamisbest5-lgtm",
+      role: "Member",
+      field: "Frontend Development",
+    },
   ],
 };
