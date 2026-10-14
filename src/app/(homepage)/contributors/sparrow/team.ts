@@ -142,5 +142,12 @@ export const TEAM: Team = {
       role: "Member",
       field: "Backend Development",
     },
+    {
+      fullName: "Ajala Oladunsi",
+      zeduUsername: "oladunsi ajala",
+      githubUsername: "Oladunsi-web-designer",
+      role: "Member",
+      field: "Frontend Development",
+    },
   ],
 };
