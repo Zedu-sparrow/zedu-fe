@@ -169,6 +169,6 @@ export const TEAM: Team = {
       githubUsername: "blackoin-studio",
       role: "Member",
       field: "Full-Stack Software Engineer",
-    }
+    },
   ],
 };
