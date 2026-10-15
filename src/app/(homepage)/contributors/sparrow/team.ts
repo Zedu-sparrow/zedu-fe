@@ -226,5 +226,12 @@ export const TEAM: Team = {
       role: "Member",
       field: "Frontend Development",
     },
+    {
+      fullName: "Godscovenant Patrick Udofe",
+      zeduUsername: "Godscovenant Patrick Udofe",
+      githubUsername: "covenantudofe-creator",
+      role: "Member",
+      field: "Frontend Development",
+    },
   ],
 };
