@@ -192,6 +192,13 @@ export const TEAM: Team = {
       field: "Backend Development",
     },
     {
+      fullName: "Belemote Dambo",
+      zeduUsername: "belemote dambo",
+      githubUsername: "Beldam7",
+      role: "Member",
+      field: "AI Automation Engineer",
+    },
+    {
       fullName: "Uwajie Bonnke",
       zeduUsername: "uwajie bonnke",
       githubUsername: "TwajiesHub",
