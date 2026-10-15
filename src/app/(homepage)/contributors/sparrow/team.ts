@@ -150,6 +150,34 @@ export const TEAM: Team = {
       field: "Backend Development",
     },
     {
+      fullName: "Maryam Gana Mohammed",
+      zeduUsername: "maryam mohammed gana",
+      githubUsername: "MaryamGana002-cmyk",
+      role: "Member",
+      field: "Product Design",
+    },
+    {
+      fullName: "Victor Onyenekwe",
+      zeduUsername: "Juice",
+      githubUsername: "JuiceAiz",
+      role: "Member",
+      field: "UI/UX Design",
+    },
+    {
+      fullName: "Ajala Oladunsi",
+      zeduUsername: "oladunsi ajala",
+      githubUsername: "Oladunsi-web-designer",
+      role: "Member",
+      field: "Frontend Development",
+    },
+    {
+      fullName: "Rabiah Usman",
+      zeduUsername: "Rabiah",
+      githubUsername: "rabiah4u",
+      role: "Member",
+      field: "Product Design",
+    },
+    {
       fullName: "Solomon Ogah",
       zeduUsername: "solo ogah",
       githubUsername: "Solo9-pora",
@@ -169,6 +197,13 @@ export const TEAM: Team = {
       githubUsername: "blackoin-studio",
       role: "Member",
       field: "Full-Stack Software Engineer",
+    },
+    {
+      fullName: "Ochu Dunamis Felix",
+      zeduUsername: "dunamis_best",
+      githubUsername: "dunamisbest5-lgtm",
+      role: "Member",
+      field: "Frontend Development",
     },
   ],
 };
