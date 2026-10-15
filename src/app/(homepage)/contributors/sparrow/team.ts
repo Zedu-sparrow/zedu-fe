@@ -163,5 +163,12 @@ export const TEAM: Team = {
       role: "Member",
       field: "Backend Development",
     },
+    {
+      fullName: "Uwajie Bonnke",
+      zeduUsername: "uwajie bonnke",
+      githubUsername: "TwajiesHub",
+      role: "Member",
+      field: "AI-assisted Development (Web & Mobile)",
+    },
   ],
 };
