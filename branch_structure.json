@@ -1,0 +1,33 @@
+{
+  "default_branch": "dev",
+  "branches": [
+    "chore/13-add-godscovenant-contributor-data",
+    "chore/49-add-uriel-contributor-data",
+    "chore/52-update-jesse-ogunlela-contributor-details",
+    "chore/6-uwajie-contributor-details",
+    "chore/7-add-belemote-contribution-data",
+    "dev",
+    "fix/channel-message-scrolling",
+    "origin"
+  ],
+  "parent": {
+    "chore/13-add-godscovenant-contributor-data": "dev",
+    "chore/49-add-uriel-contributor-data": "dev",
+    "chore/52-update-jesse-ogunlela-contributor-details": "dev",
+    "chore/6-uwajie-contributor-details": "dev",
+    "chore/7-add-belemote-contribution-data": "dev",
+    "dev": null,
+    "fix/channel-message-scrolling": "dev",
+    "origin": "dev"
+  },
+  "order": [
+    "dev",
+    "chore/13-add-godscovenant-contributor-data",
+    "chore/49-add-uriel-contributor-data",
+    "chore/52-update-jesse-ogunlela-contributor-details",
+    "chore/6-uwajie-contributor-details",
+    "chore/7-add-belemote-contribution-data",
+    "fix/channel-message-scrolling",
+    "origin"
+  ]
+}
