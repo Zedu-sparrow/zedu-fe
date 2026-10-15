@@ -3,9 +3,9 @@
   "version": "0.14.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "node init && next dev",
+    "build": "node init && next build",
+    "start": "node init && next start",
     "prepare": "husky",
     "postinstall": "node -e \"if (process.platform !== 'win32') require('child_process').execSync('chmod +x .husky/*', { stdio: 'inherit' })\"",
     "lint": "eslint ./src",
