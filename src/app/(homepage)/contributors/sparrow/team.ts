@@ -150,6 +150,13 @@ export const TEAM: Team = {
       field: "Backend Development",
     },
     {
+      fullName: "Maryam Gana Mohammed",
+      zeduUsername: "maryam mohammed gana",
+      githubUsername: "MaryamGana002-cmyk",
+      role: "Member",
+      field: "Product Design",
+    },
+    {
       fullName: "Victor Onyenekwe",
       zeduUsername: "Juice",
       githubUsername: "JuiceAiz",
