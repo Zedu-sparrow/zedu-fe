@@ -157,6 +157,27 @@ export const TEAM: Team = {
       field: "Product Design",
     },
     {
+      fullName: "Victor Onyenekwe",
+      zeduUsername: "Juice",
+      githubUsername: "JuiceAiz",
+      role: "Member",
+      field: "UI/UX Design",
+    },
+    {
+      fullName: "Ajala Oladunsi",
+      zeduUsername: "oladunsi ajala",
+      githubUsername: "Oladunsi-web-designer",
+      role: "Member",
+      field: "Frontend Development",
+    },
+    {
+      fullName: "Rabiah Usman",
+      zeduUsername: "Rabiah",
+      githubUsername: "rabiah4u",
+      role: "Member",
+      field: "Product Design",
+    },
+    {
       fullName: "Solomon Ogah",
       zeduUsername: "solo ogah",
       githubUsername: "Solo9-pora",
