@@ -7,6 +7,7 @@ const NON_ORG_PATH_SEGMENTS = [
   "accept_org_invitation",
   "accept_general_invitation",
   "billing",
+  "invite",
 ] as const;
 
 const homepageRouteSegments = () =>

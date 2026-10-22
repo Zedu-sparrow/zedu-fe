@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { DataContext } from "~/store/GlobalState";
 import { ACTIONS } from "~/store/Actions";
 import { useParams, usePathname, useRouter } from "next/navigation";
-import { ChevronRight, PlusIcon } from "lucide-react";
+import { ChevronRight, PlusIcon, UserPlus } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -17,6 +17,8 @@ import { PeopleHomeCard } from "~/app/(client)/[org]/_components/people-card";
 import Link from "next/link";
 import InviteModal from "~/app/(client)/[org]/_components/invite-modal";
 import ChannelInviteModal from "~/app/(client)/[org]/_components/invite-modal/channel";
+import InviteCohortModal from "~/app/(client)/[org]/_components/invite-cohort-modal";
+import { RequirePermission } from "~/components/rbac/RequirePermission";
 import OrganisationMenu from "~/app/(client)/[org]/_components/org-dropdown";
 import Tooltips from "~/app/(client)/[org]/_components/tooltip";
 import { formatCount } from "~/utils/utils";
@@ -36,6 +38,7 @@ export default function ChannelNav({
   const onChannelPage = pathname.includes("/channels/");
   const routeChannelId = onChannelPage ? String(params.id || "") : "";
   const [pendingChannelId, setPendingChannelId] = useState<string | null>(null);
+  const [showInviteCohort, setShowInviteCohort] = useState(false);
 
   useEffect(() => {
     if (pendingChannelId && pendingChannelId === routeChannelId) {
@@ -225,6 +228,26 @@ export default function ChannelNav({
                   </p>
                   <ChevronRight size={17} />
                 </Link>
+
+                <RequirePermission permission="invite:members">
+                  {/* Issue #200: "Invite your cohort" share link entry */}
+                  <button
+                    type="button"
+                    onClick={() => setShowInviteCohort(true)}
+                    className={cn(
+                      "mt-2 relative px-2 mx-2 py-[6px] flex items-center justify-between rounded-lg group hover:border-blue-200 border border-[#4B4BB4] cursor-pointer"
+                    )}
+                  >
+                    <p
+                      className={cn(
+                        "text-[14px] leading-4 truncate text-blue-50"
+                      )}
+                    >
+                      Invite
+                    </p>
+                    <UserPlus size={17} />
+                  </button>
+                </RequirePermission>
               </div>
             )}
 
@@ -353,6 +376,12 @@ export default function ChannelNav({
       />
       {state?.inviteModal && <InviteModal />}
       {state?.channelInvite && <ChannelInviteModal />}
+      {showInviteCohort && (
+        <InviteCohortModal
+          open={showInviteCohort}
+          onClose={() => setShowInviteCohort(false)}
+        />
+      )}
     </>
   );
 }
