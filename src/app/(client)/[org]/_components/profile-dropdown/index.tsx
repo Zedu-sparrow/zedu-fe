@@ -11,6 +11,8 @@ import {
 import images from "~/assets/images";
 import { DataContext } from "~/store/GlobalState";
 import { ACTIONS } from "~/store/Actions";
+import { UserPlus } from "lucide-react";
+import InviteCohortModal from "../invite-cohort-modal";
 import StatusModal from "../status";
 import { PostRequest } from "~/utils/new-request";
 import Link from "next/link";
@@ -23,6 +25,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ user }) => {
   const { state, dispatch } = useContext(DataContext);
   const { orgData, user: userData, orgSlug } = state;
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showInviteCohort, setShowInviteCohort] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [statusText, setStatusText] = useState("");
   const [emoji, setEmoji] = useState("");
@@ -248,6 +251,22 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ user }) => {
 
           <DropdownMenuSeparator className="my-1 bg-gray-200" />
 
+          {/* Invite your cohort (issue #200) */}
+          <DropdownMenuItem
+            onClick={() => {
+              setShowDropdown(false);
+              setShowInviteCohort(true);
+            }}
+            className="px-5 py-2 cursor-pointer hover:bg-blue-500 hover:text-white"
+          >
+            <div className="flex items-center gap-2">
+              <UserPlus size={18} />
+              <span>Invite your cohort</span>
+            </div>
+          </DropdownMenuItem>
+
+          <DropdownMenuSeparator className="my-1 bg-gray-200" />
+
           {/* Sign Out */}
           <Link href={`/${orgSlug}/settings/organisation/billing/all-plans`}>
             <DropdownMenuItem className="px-5 py-2 cursor-pointer hover:bg-blue-500 hover:text-white">
@@ -268,6 +287,11 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ user }) => {
       </DropdownMenu>
 
       <StatusModal />
+
+      <InviteCohortModal
+        open={showInviteCohort}
+        onClose={() => setShowInviteCohort(false)}
+      />
     </div>
   );
 };

@@ -13,6 +13,7 @@ import { RegisterWebhookRequest } from "~/utils/webhook-request";
 import { Separator } from "~/components/ui/separator";
 import AppleSignin from "react-apple-signin-auth";
 import { Eye, EyeOff } from "lucide-react";
+import { trackInviteEvent } from "~/lib/invite";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -73,6 +74,16 @@ function SignUp() {
       setAppleLoading(false);
     }
   };
+
+  // Issue #200: capture the invite code from an invite share link so it is
+  // saved at sign-up and the new user is linked to the person who invited them.
+  useEffect(() => {
+    const inviteCode =
+      searchParams.get("invite_code") || searchParams.get("ref");
+    if (inviteCode) {
+      localStorage.setItem("zedu_invite_code", inviteCode);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     const fromInvite = new URLSearchParams(window.location.search).get(
@@ -165,9 +176,15 @@ function SignUp() {
 
     if (validateForm() && isValidPassword) {
       setLoading(true);
+      const inviteCode =
+        searchParams.get("invite_code") ||
+        searchParams.get("ref") ||
+        localStorage.getItem("zedu_invite_code") ||
+        "";
       const payload = {
         email: trimmedEmail,
         password,
+        ...(inviteCode ? { invite_code: inviteCode } : {}),
       };
 
       const redirectUrl = searchParams.get("redirect") || "";
@@ -210,6 +227,14 @@ function SignUp() {
           message.trim(),
           "success"
         );
+
+        // Issue #200: count the sign-up against the invite code used.
+        if (inviteCode) {
+          void trackInviteEvent("signup", inviteCode, {
+            email_domain: trimmedEmail.split("@")[1] || "",
+          });
+          localStorage.removeItem("zedu_invite_code");
+        }
       } else {
         setLoading(false);
       }
